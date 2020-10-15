@@ -1,12 +1,14 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pizza_delivery_app/app/modules/menu/controllers/menu_controller.dart';
-import 'package:pizza_delivery_app/app/modules/menu/views/menu_page.dart';
-import 'package:pizza_delivery_app/app/modules/splash/view/splash_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../menu/controllers/menu_controller.dart';
+import '../../menu/views/menu_page.dart';
+import '../../my_orders/controllers/my_orders_controller.dart';
+import '../../my_orders/views/my_orders_page.dart';
+import '../../splash/view/splash_page.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,6 +30,7 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent>
     with SingleTickerProviderStateMixin {
   HomeController controller;
+  ValueNotifier<int> currentIndex = ValueNotifier<int>(0);
   @override
   void initState() {
     controller = context.read<HomeController>();
@@ -35,17 +38,18 @@ class _HomeContentState extends State<HomeContent>
       vsync: this,
       length: 4,
     );
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final Color backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+
     return Scaffold(
       appBar: AppBar(),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.white,
-        buttonBackgroundColor: Colors.white,
+        backgroundColor: backgroundColor,
+        buttonBackgroundColor: backgroundColor,
         color: Theme.of(context).primaryColor,
         height: 60.0,
         items: <Widget>[
@@ -53,13 +57,44 @@ class _HomeContentState extends State<HomeContent>
             "assets/images/logo.png",
             width: 30.0,
           ),
-          Icon(FontAwesome.list),
-          Icon(Icons.shopping_cart),
-          Icon(Icons.menu),
+          ValueListenableBuilder(
+            valueListenable: currentIndex,
+            builder: (_, currentIndexValue, child) {
+              return Icon(
+                FontAwesome.list,
+                color: currentIndexValue == 1
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
+              );
+            },
+          ),
+          ValueListenableBuilder(
+            valueListenable: currentIndex,
+            builder: (_, currentIndexValue, child) {
+              return Icon(
+                Icons.shopping_cart,
+                color: currentIndexValue == 2
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
+              );
+            },
+          ),
+          ValueListenableBuilder(
+            valueListenable: currentIndex,
+            builder: (_, currentIndexValue, child) {
+              return Icon(
+                Icons.menu,
+                color: currentIndexValue == 3
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
+              );
+            },
+          ),
         ],
         onTap: (index) {
           controller.tabController
               .animateTo(index, duration: Duration(milliseconds: 600));
+          currentIndex.value = index;
         },
       ),
       body: SafeArea(
@@ -68,12 +103,16 @@ class _HomeContentState extends State<HomeContent>
             ChangeNotifierProvider(
               create: (context) => MenuController()..findMenu(),
             ),
+            ChangeNotifierProvider(
+              create: (context) => MyOrdersController(),
+            )
           ],
           child: TabBarView(
             controller: controller.tabController,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               MenuPage(),
-              Container(),
+              MyOrdersPage(),
               Container(),
               FlatButton(
                 onPressed: () async {

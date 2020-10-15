@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:pizza_delivery_app/app/exceptions/rest_exception.dart';
-import 'package:pizza_delivery_app/app/models/menu_model.dart';
+
+import '../exceptions/rest_exception.dart';
+import '../models/menu_model.dart';
 import '../shared/utils/constants.dart' as constants;
 
 class MenuRepository {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:pizza_delivery_app/app/models/menu_item_model.dart';
-import 'package:pizza_delivery_app/app/modules/menu/controllers/menu_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
+
+import '../../../models/menu_item_model.dart';
+import '../controllers/menu_controller.dart';
 
 class MenuPage extends StatelessWidget {
   @override

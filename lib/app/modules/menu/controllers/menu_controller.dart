@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_delivery_app/app/models/menu_model.dart';
-import 'package:pizza_delivery_app/app/repositories/menu_repository.dart';
+
+import '../../../models/menu_model.dart';
+import '../../../repositories/menu_repository.dart';
 
 class MenuController extends ChangeNotifier {
   MenuRepository _repository = MenuRepository();
