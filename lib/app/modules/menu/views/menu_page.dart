@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:pizza_delivery_app/app/modules/home/controllers/home_controller.dart';
-import 'package:pizza_delivery_app/app/modules/shopping_cart/controllers/shopping_cart_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 
 import '../../../models/menu_item_model.dart';
+import '../../home/controllers/home_controller.dart';
+import '../../shopping_cart/controllers/shopping_cart_controller.dart';
 import '../controllers/menu_controller.dart';
 
 class MenuPage extends StatelessWidget {

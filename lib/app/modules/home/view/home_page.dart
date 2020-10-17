@@ -1,8 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pizza_delivery_app/app/modules/shopping_cart/controllers/shopping_cart_controller.dart';
-import 'package:pizza_delivery_app/app/modules/shopping_cart/views/shopping_cart_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +8,8 @@ import '../../menu/controllers/menu_controller.dart';
 import '../../menu/views/menu_page.dart';
 import '../../my_orders/controllers/my_orders_controller.dart';
 import '../../my_orders/views/my_orders_page.dart';
+import '../../shopping_cart/controllers/shopping_cart_controller.dart';
+import '../../shopping_cart/views/shopping_cart_page.dart';
 import '../../splash/view/splash_page.dart';
 import '../controllers/home_controller.dart';
 

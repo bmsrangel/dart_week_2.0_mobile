@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:intl/intl.dart';
-import 'package:pizza_delivery_app/app/models/menu_item_model.dart';
-import 'package:pizza_delivery_app/app/modules/home/controllers/home_controller.dart';
-import 'package:pizza_delivery_app/app/modules/shopping_cart/controllers/shopping_cart_controller.dart';
-import 'package:pizza_delivery_app/app/shared/components/pizza_delivery_button.dart';
-import 'package:pizza_delivery_app/app/shared/components/shopping_cart_item.dart';
-import 'package:pizza_delivery_app/app/shared/mixins/loader_mixin.dart';
-import 'package:pizza_delivery_app/app/shared/mixins/messages_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
+
+import '../../../models/menu_item_model.dart';
+import '../../../shared/components/pizza_delivery_button.dart';
+import '../../../shared/components/shopping_cart_item.dart';
+import '../../../shared/mixins/loader_mixin.dart';
+import '../../../shared/mixins/messages_mixin.dart';
+import '../../home/controllers/home_controller.dart';
+import '../controllers/shopping_cart_controller.dart';
 
 class ShoppingCartPage extends StatefulWidget {
   @override

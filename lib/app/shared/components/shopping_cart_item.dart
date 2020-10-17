@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pizza_delivery_app/app/models/menu_item_model.dart';
+
+import '../../models/menu_item_model.dart';
 
 class ShoppingCartItem extends StatelessWidget {
   ShoppingCartItem(

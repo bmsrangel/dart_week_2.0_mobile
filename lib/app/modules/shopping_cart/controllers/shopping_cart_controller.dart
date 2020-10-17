@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_delivery_app/app/models/menu_item_model.dart';
-import 'package:pizza_delivery_app/app/models/user_model.dart';
-import 'package:pizza_delivery_app/app/repositories/orders_repository.dart';
-import 'package:pizza_delivery_app/app/view_models/checkout_input_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../models/menu_item_model.dart';
+import '../../../models/user_model.dart';
+import '../../../repositories/orders_repository.dart';
+import '../../../view_models/checkout_input_model.dart';
 
 class ShoppingCartController extends ChangeNotifier {
   UserModel user;

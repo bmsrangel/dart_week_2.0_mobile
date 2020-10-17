@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../exceptions/rest_exception.dart';
 import '../../../models/order_model.dart';
 import '../../../models/user_model.dart';
 import '../../../repositories/orders_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MyOrdersController extends ChangeNotifier {
   bool loading = false;
