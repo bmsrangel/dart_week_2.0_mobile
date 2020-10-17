@@ -61,7 +61,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
               ? _buildClearShoppingCart(context)
               : SingleChildScrollView(
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 140.0,
+                    height: MediaQuery.of(context).size.height * .8,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [

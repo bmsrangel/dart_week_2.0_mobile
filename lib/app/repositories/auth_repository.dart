@@ -9,8 +9,8 @@ import '../view_models/register_input_model.dart';
 class AuthRepository {
   Future<UserModel> login(String email, String password) async {
     try {
-      final Response response =
-          await Dio().post("${constants.baseUrl}/user/auth", data: {
+      final Response response = await Dio(BaseOptions(connectTimeout: 2000))
+          .post("${constants.baseUrl}/user/auth", data: {
         "email": email,
         "password": password,
       });

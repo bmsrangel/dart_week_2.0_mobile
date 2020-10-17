@@ -7,7 +7,8 @@ import '../shared/utils/constants.dart' as constants;
 class MenuRepository {
   Future<List<MenuModel>> findAll() async {
     try {
-      final Response response = await Dio().get("${constants.baseUrl}/menu");
+      final Response response = await Dio(BaseOptions(connectTimeout: 2000))
+          .get("${constants.baseUrl}/menu");
       return response.data.map<MenuModel>((m) => MenuModel.fromMap(m)).toList();
     } on DioError catch (e) {
       print(e);
