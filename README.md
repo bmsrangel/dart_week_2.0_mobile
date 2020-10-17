@@ -30,6 +30,10 @@ Steps to run the application:
 
 - Clone the repository
 - Download the packages (`flutter pub get`)
+- Change the server's IP address defined within _constants.dart_ (`lib\app\shared\utils\constants.dart`)
+  - To run the application locally using the emulator: either the address `10.0.0.2` can be used or the local network IP address of the device (PC/laptop) running the backend server;
+  - To run the application locally using a real device, use the local IP address of the device which is running the backend server;
+  - To run the application in a remote server, use either the server IP address or the server URL.
 - Run the application
 
 **The debug mode does NOT reflect the actual performance of the application. So, in order the get a more consistent experience, it's recommended to run the application in an actual device either using the _profile version_ (`flutter run --profile`) or building the .apk file (`flutter build apk`) and installing it in the device.**```
