@@ -29,4 +29,17 @@ class MenuItemModel {
 
   factory MenuItemModel.fromJson(String source) =>
       MenuItemModel.fromMap(json.decode(source));
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is MenuItemModel &&
+        o.id == id &&
+        o.name == name &&
+        o.price == price;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode ^ price.hashCode;
 }

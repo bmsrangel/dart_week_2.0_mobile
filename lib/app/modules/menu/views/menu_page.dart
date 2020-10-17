@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
+import 'package:pizza_delivery_app/app/modules/home/controllers/home_controller.dart';
+import 'package:pizza_delivery_app/app/modules/shopping_cart/controllers/shopping_cart_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 
@@ -20,6 +22,22 @@ class MenuPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: Consumer<ShoppingCartController>(
+        builder: (_, controller, __) {
+          if (controller.hasItemsSelected) {
+            return FloatingActionButton.extended(
+              onPressed: () {
+                context.read<HomeController>().changeTab(2);
+              },
+              label: Text("Finalizar Pedido"),
+              icon: Icon(Icons.monetization_on),
+              backgroundColor: Theme.of(context).primaryColor,
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       ),
     );
   }
@@ -69,9 +87,12 @@ class MenuPage extends StatelessWidget {
         } else {
           var menu = controller.menu;
           return Column(
-            children: menu.map<Widget>((m) {
-              return _buildGroup(context, m.name, m.items);
-            }).toList(),
+            children: [
+              ...menu.map<Widget>((m) {
+                return _buildGroup(context, m.name, m.items);
+              }).toList(),
+              const SizedBox(height: 60.0),
+            ],
           );
         }
       },
@@ -111,11 +132,20 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
               subtitle: Text("R\$ ${formatter.format(menuItem.price)}"),
-              trailing: IconButton(
-                icon: Icon(FontAwesome.plus_square),
-                color: Theme.of(context).primaryColor,
-                iconSize: 20.0,
-                onPressed: () {},
+              trailing: Consumer<ShoppingCartController>(
+                builder: (_, controllerShoppingCart, __) {
+                  final bool isItemSelected =
+                      controllerShoppingCart.isItemSelected(menuItem);
+                  return IconButton(
+                    icon: Icon(isItemSelected
+                        ? FontAwesome.minus_square
+                        : FontAwesome.plus_square),
+                    color: Theme.of(context).primaryColor,
+                    iconSize: 20.0,
+                    onPressed: () =>
+                        controllerShoppingCart.addOrRemoveItem(menuItem),
+                  );
+                },
               ),
             );
           },

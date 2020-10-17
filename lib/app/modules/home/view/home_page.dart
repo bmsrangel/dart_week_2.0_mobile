@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pizza_delivery_app/app/modules/shopping_cart/controllers/shopping_cart_controller.dart';
+import 'package:pizza_delivery_app/app/modules/shopping_cart/views/shopping_cart_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +32,14 @@ class HomeContent extends StatefulWidget {
 class _HomeContentState extends State<HomeContent>
     with SingleTickerProviderStateMixin {
   HomeController controller;
+  final _titles = [
+    "Cardápio",
+    "Meus Pedidos",
+    "Carrinho de compras",
+    "Configurações",
+  ];
   ValueNotifier<int> currentIndex = ValueNotifier<int>(0);
+
   @override
   void initState() {
     controller = context.read<HomeController>();
@@ -46,8 +55,17 @@ class _HomeContentState extends State<HomeContent>
     final Color backgroundColor = Theme.of(context).scaffoldBackgroundColor;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: ValueListenableBuilder(
+          valueListenable: currentIndex,
+          builder: (_, currentIndexValue, child) {
+            return Text(_titles[currentIndexValue]);
+          },
+        ),
+      ),
       bottomNavigationBar: CurvedNavigationBar(
+        key: controller.bottomNavigationKey,
         backgroundColor: backgroundColor,
         buttonBackgroundColor: backgroundColor,
         color: Theme.of(context).primaryColor,
@@ -105,7 +123,10 @@ class _HomeContentState extends State<HomeContent>
             ),
             ChangeNotifierProvider(
               create: (context) => MyOrdersController(),
-            )
+            ),
+            ChangeNotifierProvider(
+              create: (context) => ShoppingCartController(),
+            ),
           ],
           child: TabBarView(
             controller: controller.tabController,
@@ -113,7 +134,7 @@ class _HomeContentState extends State<HomeContent>
             children: [
               MenuPage(),
               MyOrdersPage(),
-              Container(),
+              ShoppingCartPage(),
               FlatButton(
                 onPressed: () async {
                   final SharedPreferences sp =
